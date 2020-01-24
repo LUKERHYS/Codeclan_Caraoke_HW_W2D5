@@ -34,29 +34,41 @@ class TestRoom < Minitest::Test
     assert_equal("Blue", @room1.name)
   end
 
-  def test_can_add_guests_to_room
-    adding_guests = @room1.add_guests_to_room(@group1)
-    assert_equal(4, adding_guests)
+  def test_can_get_track_length
+    assert_equal(6.00, @song4.track_length)
   end
 
-  def test_reomove_guests_from_room
+  def test_can_add_guests_to_room
+    adding_guests = @room1.add_guests_to_room(@group1)
+    assert_equal(4, adding_guests.count())
+  end
+
+  def test_remove_guests_from_room
     @room1.add_guests_to_room(@group1)
-    assert_equal(0, @room1.clear_room_of_guests)
+    clear_guests = @room1.clear_room_of_guests
+    assert_equal(0, clear_guests.count())
   end
 
   def test_can_add_a_song_to_queue
     adding_songs = @room1.add_song_to_room_queue(@song1)
-    assert_equal(1, adding_songs)
+    assert_equal(1, adding_songs.count())
   end
 
   def test_can_add_a_playlist_to_queue
     adding_songs = @room1.add_song_to_room_queue(@playlist1)
-    assert_equal(4, adding_songs)
+    assert_equal(4, adding_songs.count)
   end
 
   def test_remove_songs_from_queue
     @room1.add_song_to_room_queue(@playlist1)
-    assert_equal(0, @room1.clear_songs_queue)
+    clear_songs_from_queue = @room1.clear_songs_queue
+    assert_equal(0, clear_songs_from_queue.count)
+  end
+
+  def test_can_get_total_queue_play_length
+    playlist_length = @room2.add_song_to_room_queue(@playlist1)
+    length_of_queue = @room2.total_queue_length(playlist_length)
+    assert_equal(17.73, length_of_queue)
   end
 
 
