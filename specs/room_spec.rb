@@ -4,7 +4,7 @@ require('minitest/reporters')
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative('../song')
-require_relative('../room')
+require_relative( '../room' )
 require_relative('../guest')
 
 
@@ -20,6 +20,8 @@ class TestRoom < Minitest::Test
     @song3 = Song.new("Good Thing Gone", 3.40, "Elle King")
     @song4 = Song.new("Crazy in Love", 6.00, "Beyonce")
 
+    @playlist1 = [@song1, @song2, @song3, @song4]
+
     @guest1 = Guest.new("Luke", @song1)
     @guest2 = Guest.new("Lyndsey", @song4)
     @guest3 = Guest.new("Mat", @song2)
@@ -28,9 +30,35 @@ class TestRoom < Minitest::Test
     @group1 = [@guest1, @guest2, @guest3, @guest4]
   end
 
+  def test_can_get_name
+    assert_equal("Blue", @room1.name)
+  end
+
+  def test_can_add_guests_to_room
+    adding_guests = @room1.add_guests_to_room(@group1)
+    assert_equal(4, adding_guests)
+  end
+
+  def test_reomove_guests_from_room
+    @room1.add_guests_to_room(@group1)
+    assert_equal(0, @room1.clear_room_of_guests)
+  end
+
   def test_can_add_a_song_to_queue
-    adding_songs = add_song_to_room_queue(@song1)
+    adding_songs = @room1.add_song_to_room_queue(@song1)
     assert_equal(1, adding_songs)
   end
+
+  def test_can_add_a_playlist_to_queue
+    adding_songs = @room1.add_song_to_room_queue(@playlist1)
+    assert_equal(4, adding_songs)
+  end
+
+  def test_remove_songs_from_queue
+    @room1.add_song_to_room_queue(@playlist1)
+    assert_equal(0, @room1.clear_songs_queue)
+  end
+
+
 
 end
