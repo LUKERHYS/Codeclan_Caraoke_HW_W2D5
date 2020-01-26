@@ -1,6 +1,6 @@
 require('minitest/autorun')
 require('minitest/reporters')
-require('pry')
+#require('pry')
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative('../song')
@@ -35,6 +35,8 @@ class TestRoom < Minitest::Test
     @drink1 = Drink.new("Gin & Tonic", 4.00)
     @drink2 = Drink.new("Beer", 5.00)
     @drink3 = Drink.new("wine", 6.00)
+
+    @drinks = [@drink1, @drink2, @drink3]
   end
 
   def test_can_get_name
@@ -111,13 +113,18 @@ class TestRoom < Minitest::Test
 
   def test_adding_entry_fee_to_bar_tab
     @room2.add_guests_to_room(@group1)
-    result = @room2.add_entry_to_tab(@group1)
-    assert_equal(20.00, result)
+    @room2.add_entry_to_tab(@group1)
+    assert_equal(20.00, @room2.bar_tab)
   end
 
   def test_adding_drinks_to_bar_tab
-    result = @room2.add_drinks_to_tab(@drink1)
-    assert_equal(4.00, result)
+    @room2.add_drinks_to_tab(@drinks)
+    assert_equal(15.00, @room2.bar_tab)
+  end
+
+  def test_add_drinks_and_entry_to_tab
+    @room3.put_it_on_my_tab(@group1, @drinks)
+    assert_equal(35.00, @room3.bar_tab)
   end
 
 end

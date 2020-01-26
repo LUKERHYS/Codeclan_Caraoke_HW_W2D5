@@ -54,15 +54,17 @@ end
 def add_entry_to_tab(people)
   person = people.count
   total = person * 5
-   total += @bar_tab
+  @bar_tab += total
 end
 
 def add_drinks_to_tab(drinks)
-  binding.pry
-  for drink in drinks.price
-    drink += @bar_tab
+  for drink in drinks
+    @bar_tab += drink.price
   end
-  return @bar_tab
 end
 
+def put_it_on_my_tab(people, drinks)
+  add_drinks_to_tab(drinks)
+  add_entry_to_tab(people)
+end
 end
