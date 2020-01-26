@@ -47,8 +47,15 @@ end
     return @exclusive_use
   end
 
-  def space_in_room
-    return @room_size -= @guests_in_room.flatten.count
+  def space_in_room(people, room)
+    people_to_add = []
+    people_to_add.push(people)
+    space_left = @room_size -= @guests_in_room.flatten.count
+    if space_left < people_to_add.count
+      return room.add_guests_to_room(people_to_add)
+    else
+      return "Sorry not enough space"
+    end
   end
 
 def add_entry_to_tab(people)

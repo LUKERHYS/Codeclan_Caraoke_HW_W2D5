@@ -96,20 +96,22 @@ class TestRoom < Minitest::Test
   end
 
   def test_is_there_space_in_room__true
-    adding_guests = @room3.add_guests_to_room(@group1)
-    assert_equal(1, @room3.space_in_room)
-  end
-
-  def test_is_there_space_in_room__flase
-  adding_guests = @room2.add_guests_to_room(@group1)
-  assert_equal(0, @room2.space_in_room)
-  end
-
-  def test_can_add_guests_to_room_if_space_and_not_exclusive
     @room3.add_guests_to_room(@group1)
-    @room3.add_guests_to_room(@person1)
-    assert_equal(0, @room3.space_in_room)
+    @room3.space_in_room(@guest1, @room3)
+    assert_equal(5, @room3.guests_in_room)
   end
+
+  # def test_is_there_space_in_room__flase
+  # adding_guests = @room2.add_guests_to_room(@group1)
+  #
+  # assert_equal(4, @room2.guests_in_room)
+  # end
+
+  # def test_can_add_guests_to_room_if_space_and_not_exclusive
+  #   @room3.add_guests_to_room(@group1)
+  #   @room3.add_guests_to_room(@person1)
+  #   assert_equal(0, @room3.space_in_room)
+  # end
 
   def test_adding_entry_fee_to_bar_tab
     @room2.add_guests_to_room(@group1)
