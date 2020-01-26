@@ -1,11 +1,14 @@
 class Room
-attr_reader :name, :room_size
+attr_reader :name, :room_size, :exclusive_use
+attr_accessor :bar_tab
 
-def initialize(name, room_size)
+def initialize(name, room_size, exclusive_use)
   @name = name
   @room_size = room_size
   @guests_in_room = []
   @songs_queue = []
+  @exclusive_use = exclusive_use
+  @bar_tab = 0.00
 end
 
 def add_guests_to_room(guests)
@@ -23,6 +26,10 @@ def add_song_to_room_queue(song)
   return @songs_queue.flatten()
 end
 
+def get_songs_queue
+  return @songs_queue
+end
+
 def clear_songs_queue
   @songs_queue = []
   return @songs_queue
@@ -36,5 +43,26 @@ end
     return total_playlist_time
   end
 
+  def is_room_exclusive_use
+    return @exclusive_use
+  end
+
+  def space_in_room
+    return @room_size -= @guests_in_room.flatten.count
+  end
+
+def add_entry_to_tab(people)
+  person = people.count
+  total = person * 5
+   total += @bar_tab
+end
+
+def add_drinks_to_tab(drinks)
+  binding.pry
+  for drink in drinks.price
+    drink += @bar_tab
+  end
+  return @bar_tab
+end
 
 end

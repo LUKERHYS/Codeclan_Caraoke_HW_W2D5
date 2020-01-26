@@ -4,15 +4,14 @@ require('minitest/reporters')
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 require_relative('../song')
-require_relative('../room')
+require_relative( '../room' )
 require_relative('../guest')
 require_relative('../building')
+require_relative('../drink')
 
 
-class TestSong < Minitest::Test
-  def setup
 
-  end
 
+class TestDrink < Minitest::Test
 
 end
