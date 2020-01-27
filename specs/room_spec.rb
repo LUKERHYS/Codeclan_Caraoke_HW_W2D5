@@ -110,8 +110,8 @@ class TestRoom < Minitest::Test
 
   # def test_can_add_guests_to_room_if_space_and_not_exclusive
   #   @room3.add_guests_to_room(@group1)
-  #   @room3.add_guests_to_room(@person1)
-  #   assert_equal(0, @room3.space_in_room)
+  #   @room3.add_guests_to_room(@group1)
+  #   assert_equal(0, @room3.space_in_room(@room3, @group2))
   # end
 
   def test_adding_entry_fee_to_bar_tab

@@ -62,9 +62,20 @@ end
       people_to_add << person
     end
     if space_left >= people_to_add.count
-      room.add_guests_to_room(people)
+        room.add_guests_to_room(people)
     end
   end
+
+  # def space_in_room(people, room)
+  #   people_to_add = []
+  #   space_left = @room_size -= @guests_in_room.flatten.count
+  #   for person in people
+  #     people_to_add << person
+  #   end
+  #   if space_left >= people_to_add.count && room.is_room_exclusive_use == false
+  #       room.add_guests_to_room(people)
+  #   end
+  # end
 
 def add_entry_to_tab(people)
   person = people.count
