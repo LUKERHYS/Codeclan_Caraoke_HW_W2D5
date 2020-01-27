@@ -31,6 +31,7 @@ class TestRoom < Minitest::Test
     @guest4 = Guest.new("Katie", @song3, 50.00)
 
     @group1 = [@guest1, @guest2, @guest3, @guest4]
+    @group2 = [@guest1, @guest2]
 
     @drink1 = Drink.new("Gin & Tonic", 4.00)
     @drink2 = Drink.new("Beer", 5.00)
@@ -103,8 +104,8 @@ class TestRoom < Minitest::Test
 
   def test_is_there_space_in_room__pass
   @room4.add_guests_to_room(@group1)
-  @room4.space_in_room(@group1, @room4)
-  assert_equal(8, @room4.get_guests_in_room_number)
+  @room4.space_in_room(@group2, @room4)
+  assert_equal(6, @room4.get_guests_in_room_number)
   end
 
   # def test_can_add_guests_to_room_if_space_and_not_exclusive

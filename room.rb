@@ -61,7 +61,7 @@ end
     for person in people
       people_to_add << person
     end
-    if space_left > people_to_add.count
+    if space_left >= people_to_add.count
       room.add_guests_to_room(people)
     end
   end
