@@ -16,6 +16,14 @@ def add_guests_to_room(guests)
   return @guests_in_room.flatten()
 end
 
+def get_guests_in_room
+  return @guests_in_room
+end
+
+def get_guests_in_room_number
+  return @guests_in_room.flatten.count
+end
+
 def clear_room_of_guests
   @guests_in_room = []
   return @guests_in_room
@@ -49,12 +57,12 @@ end
 
   def space_in_room(people, room)
     people_to_add = []
-    people_to_add.push(people)
     space_left = @room_size -= @guests_in_room.flatten.count
-    if space_left < people_to_add.count
-      return room.add_guests_to_room(people_to_add)
-    else
-      return "Sorry not enough space"
+    for person in people
+      people_to_add << person
+    end
+    if space_left > people_to_add.count
+      room.add_guests_to_room(people)
     end
   end
 

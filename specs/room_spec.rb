@@ -95,17 +95,17 @@ class TestRoom < Minitest::Test
     assert_equal(false, @room1.is_room_exclusive_use)
   end
 
-  def test_is_there_space_in_room__true
+  def test_is_there_space_in_room__fail
     @room3.add_guests_to_room(@group1)
-    @room3.space_in_room(@guest1, @room3)
-    assert_equal(5, @room3.guests_in_room)
+    @room3.space_in_room(@group1, @room3)
+    assert_equal(4, @room3.get_guests_in_room_number)
   end
 
-  # def test_is_there_space_in_room__flase
-  # adding_guests = @room2.add_guests_to_room(@group1)
-  #
-  # assert_equal(4, @room2.guests_in_room)
-  # end
+  def test_is_there_space_in_room__pass
+  @room4.add_guests_to_room(@group1)
+  @room4.space_in_room(@group1, @room4)
+  assert_equal(8, @room4.get_guests_in_room_number)
+  end
 
   # def test_can_add_guests_to_room_if_space_and_not_exclusive
   #   @room3.add_guests_to_room(@group1)
